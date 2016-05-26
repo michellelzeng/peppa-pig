@@ -1,4 +1,4 @@
-package com.mm;
+package com.hello;
 
 public class Greeting {
     private final long id;
