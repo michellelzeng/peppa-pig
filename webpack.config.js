@@ -6,7 +6,16 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.css$/, loader: "style!css" }
+            {
+                test: /\.js$/,
+                loader: "babel",
+                query: {
+                    presets: ['react', 'es2015'],
+                    plugins: ['transform-object-rest-spread']
+                }
+            }
+
         ]
-    }
+    },
+    devtool: "#inline-source-map"
 };
