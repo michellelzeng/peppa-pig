@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 function init(){
-    const CommentBox = React.createClass({
+    const NewsFeed = React.createClass({
       render: function() {
         return (
           <div>
-            Hello, world! I am a CommentBox.
+            Hello, world!
           </div>
         );
       }
     });
     ReactDOM.render(
-      <CommentBox />,
-      document.getElementById('todo-list')
+      <NewsFeed />,
+      document.getElementById('app')
     );
 }
 
