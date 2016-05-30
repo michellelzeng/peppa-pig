@@ -26,23 +26,23 @@ public class PeppaPigApplication {
 			repository.save(new Post("Post 4", "Daily post May 23"));
 			repository.save(new Post("Post 5", "Daily post May 24"));
 
-			// fetch all customers
-			log.info("Customers found with findAll():");
+			// fetch all posts
+			log.info("posts found with findAll():");
 			log.info("-------------------------------");
 			for (Post post : repository.findAll()) {
 				log.info(post.toString());
 			}
 			log.info("");
 
-			// fetch an individual customer by ID
+			// fetch an individual post by ID
 			Post post = repository.findOne(1L);
 			log.info("Post found with findOne(1L):");
 			log.info("--------------------------------");
 			log.info(post.toString());
 			log.info("");
 
-			// fetch customers by last name
-			log.info("Customer found with findByLastName('Bauer'):");
+			// fetch posts by last name
+			log.info("Post found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
 			for (Post post1 : repository.findByTitle("Post 1")) {
 				log.info(post1.toString());
