@@ -5,6 +5,7 @@ export default class NewsFeed extends Component{
         const posts = this.props.posts;
         return  (
             <div>
+                <span>Pepper pig</span>
                 {posts.map((post) => (
                     <div>
                         <span>{post.title}</span>

@@ -1,9 +1,14 @@
-import data from "./example_data";
-
 const initialState = {
-    posts: data.posts
+    posts: []
 };
 
-export default function appReducer(state = initialState) {
+export default function appReducer(state = initialState, action) {
+    switch(action.type) {
+        case 'SET_POSTS':
+            return {
+                ...state,
+                posts: action.posts
+            };
+    }
     return state;
 }
