@@ -3,22 +3,10 @@ import ReactDOM from 'react-dom';
 import NewsFeed from './component/news-feed';
 import {createStore} from "redux";
 import appReducer from './reducer';
+import CommentBox from './component/comment-box';
 
 function init(){
-
-
-    let store = createStore(appReducer);
-    
-    ReactDOM.render(
-      <NewsFeed posts={store.getState().posts}/>,
-      document.getElementById('app')
-    );
-    fetch("http://localhost:8080/post")
-        .then((response) => response.json())
-        .then((data) => {
-            store.dispatch({type: 'SET_POSTS', posts: data.post})
-        });
-
+    ReactDOM.render(<CommentBox/>, document.getElementById("app"));
 }
 
 if (document.readyState === 'complete') {
