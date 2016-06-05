@@ -12,6 +12,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private long key;
     private String title;
     private String content;
 
@@ -44,4 +45,11 @@ public class Post {
         return String.format("%s %s %s", id, title, content);
     }
 
+    public long getKey() {
+        return id;
+    }
+
+    public void setKey(long key) {
+        this.key = key;
+    }
 }
