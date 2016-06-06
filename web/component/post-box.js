@@ -14,27 +14,29 @@ const PostBox = React.createClass({
                     .then((response) => response.json())
                     .then((data) => {
                         this.setState({status: 'ready', data: data._embedded.post});
+                        this.props.store.dispatch({type: 'SET_POSTS', posts: data._embedded.post});
                     });
         },
 
-        handleCommentSubmit: function(comment) {
+        handleSubmit: function(post) {
             fetch("/post", {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(comment)
+                body: JSON.stringify(post)
             });
-            comment.key = Date.now();
-            let comments = this.state.data;
-            this.setState({data: comments.concat([comment])})
+            post.key = Date.now();
+            let newPosts = this.state.data.concat([post]);
+            this.setState({data: newPosts});
+            this.props.store.dispatch({type: 'SET_POSTS', posts: newPosts});
         },
 
         render: function() {
              return (<div>
                  <h1>Recent Posts</h1>
                  <PostList status={this.state.status} data={this.state.data}/>
-                 <PostForm onCommentSubmit={this.handleCommentSubmit}/>
+                 <PostForm onCommentSubmit={this.handleSubmit}/>
              </div>)
         }
     });

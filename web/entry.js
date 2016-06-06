@@ -6,7 +6,8 @@ import appReducer from './reducer';
 import PostBox from './component/post-box';
 
 function init(){
-    ReactDOM.render(<PostBox/>, document.getElementById("app"));
+    const store = createStore(appReducer);
+    ReactDOM.render(<PostBox store={store}/>, document.getElementById("app"));
 }
 
 if (document.readyState === 'complete') {
