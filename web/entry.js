@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import NewsFeed from './component/news-feed';
 import {createStore} from "redux";
 import appReducer from './reducer';
-import CommentBox from './component/comment-box';
+import PostBox from './component/post-box';
 
 function init(){
-    ReactDOM.render(<CommentBox/>, document.getElementById("app"));
+    ReactDOM.render(<PostBox/>, document.getElementById("app"));
 }
 
 if (document.readyState === 'complete') {

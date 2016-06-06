@@ -1,8 +1,8 @@
 import React from 'react';
-import CommentList from './comment-list';
-import CommentForm from './comment-form';
+import PostList from './post-list';
+import PostForm from './post-form';
 
-const CommentBox = React.createClass({
+const PostBox = React.createClass({
         getInitialState: () => (
             {data: []}
         ),
@@ -16,7 +16,7 @@ const CommentBox = React.createClass({
         },
 
         handleCommentSubmit: function(comment) {
-            console.log('submit request to server' + comment.content + comment.author);
+            console.log('submit request to server' + comment.content + comment.title);
             fetch("/post", {
                 method:'POST',
                 headers: {
@@ -31,11 +31,11 @@ const CommentBox = React.createClass({
 
         render: function() {
              return (<div>
-                 <h1>Comments</h1>
-                 <CommentList data={this.state.data}/>
-                 <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
+                 <h1>Recent Posts</h1>
+                 <PostList data={this.state.data}/>
+                 <PostForm onCommentSubmit={this.handleCommentSubmit}/>
              </div>)
         }
     });
 
-export default CommentBox;
+export default PostBox;
