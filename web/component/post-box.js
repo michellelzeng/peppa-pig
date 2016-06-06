@@ -10,16 +10,17 @@ const PostBox = React.createClass({
         ),
 
         componentDidMount: function() {
-            fetch("/post")
+            fetch("/piggiepost")
                     .then((response) => response.json())
                     .then((data) => {
-                        this.setState({status: 'ready', data: data._embedded.post});
-                        this.props.store.dispatch({type: 'SET_POSTS', posts: data._embedded.post});
+                        const posts = data._embedded.piggiepost;
+                        this.setState({status: 'ready', data: posts});
+                        this.props.store.dispatch({type: 'SET_POSTS', posts: posts});
                     });
         },
 
         handleSubmit: function(post) {
-            fetch("/post", {
+            fetch("/piggiepost", {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'

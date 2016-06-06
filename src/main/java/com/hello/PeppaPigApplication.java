@@ -17,35 +17,35 @@ public class PeppaPigApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(PostRepository repository) {
+	public CommandLineRunner demo(PiggiePostRepository repository) {
 		return (args) -> {
 			// save a couple of Posts
-			repository.save(new Post("Post 1", "Daily post May 20"));
-			repository.save(new Post("Post 2", "Daily post May 21"));
-			repository.save(new Post("Post 3", "Daily post May 22"));
-			repository.save(new Post("Post 4", "Daily post May 23"));
-			repository.save(new Post("Post 5", "Daily post May 24"));
+			repository.save(new PiggiePost("Post 1", "Daily post May 20"));
+			repository.save(new PiggiePost("Post 2", "Daily post May 21"));
+			repository.save(new PiggiePost("Post 3", "Daily post May 22"));
+			repository.save(new PiggiePost("Post 4", "Daily post May 23"));
+			repository.save(new PiggiePost("Post 5", "Daily post May 24"));
 
 			// fetch all posts
 			log.info("posts found with findAll():");
 			log.info("-------------------------------");
-			for (Post post : repository.findAll()) {
-				log.info(post.toString());
+			for (PiggiePost piggiePost : repository.findAll()) {
+				log.info(piggiePost.toString());
 			}
 			log.info("");
 
 			// fetch an individual post by ID
-			Post post = repository.findOne(1L);
+			PiggiePost piggiePost = repository.findOne(1L);
 			log.info("Post found with findOne(1L):");
 			log.info("--------------------------------");
-			log.info(post.toString());
+			log.info(piggiePost.toString());
 			log.info("");
 
 			// fetch posts by last name
 			log.info("Post found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
-			for (Post post1 : repository.findByTitle("Post 1")) {
-				log.info(post1.toString());
+			for (PiggiePost piggiePost1 : repository.findByTitle("Post 1")) {
+				log.info(piggiePost1.toString());
 			}
 			log.info("");
 		};

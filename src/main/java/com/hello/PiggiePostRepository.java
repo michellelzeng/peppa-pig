@@ -6,8 +6,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "post", path = "post")
-public interface PostRepository extends CrudRepository<Post, Long> {
+@RepositoryRestResource(collectionResourceRel = "piggiepost", path = "piggiepost")
+public interface PiggiePostRepository extends CrudRepository<PiggiePost, Long> {
 
-    List<Post> findByTitle(@Param("title") String title);
+    List<PiggiePost> findByTitle(@Param("title") String title);
 }

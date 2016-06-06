@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Post {
+public class PiggiePost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class Post {
     private String title;
     private String content;
 
-    public Post() {
+    public PiggiePost() {
     }
 
-    public Post(String title, String content) {
+    public PiggiePost(String title, String content) {
         this.title = title;
         this.content = content;
     }
