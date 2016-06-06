@@ -4,19 +4,20 @@ import PostForm from './post-form';
 
 const PostBox = React.createClass({
         getInitialState: () => (
-            {data: []}
+            {
+                status: 'loading',
+                data: []}
         ),
 
         componentDidMount: function() {
             fetch("/post")
                     .then((response) => response.json())
                     .then((data) => {
-                        this.setState({data: data._embedded.post});
+                        this.setState({status: 'ready', data: data._embedded.post});
                     });
         },
 
         handleCommentSubmit: function(comment) {
-            console.log('submit request to server' + comment.content + comment.title);
             fetch("/post", {
                 method:'POST',
                 headers: {
@@ -32,7 +33,7 @@ const PostBox = React.createClass({
         render: function() {
              return (<div>
                  <h1>Recent Posts</h1>
-                 <PostList data={this.state.data}/>
+                 <PostList status={this.state.status} data={this.state.data}/>
                  <PostForm onCommentSubmit={this.handleCommentSubmit}/>
              </div>)
         }
