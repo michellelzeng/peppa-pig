@@ -8,7 +8,6 @@ const CommentBox = React.createClass({
         ),
 
         componentDidMount: function() {
-            debugger;
             fetch("/post")
                     .then((response) => response.json())
                     .then((data) => {
@@ -16,11 +15,25 @@ const CommentBox = React.createClass({
                     });
         },
 
+        handleCommentSubmit: function(comment) {
+            console.log('submit request to server' + comment.content + comment.author);
+            fetch("/post", {
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comment)
+            });
+            comment.key = Date.now();
+            let comments = this.state.data;
+            this.setState({data: comments.concat([comment])})
+        },
+
         render: function() {
              return (<div>
                  <h1>Comments</h1>
                  <CommentList data={this.state.data}/>
-                 <CommentForm />
+                 <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
              </div>)
         }
     });
