@@ -35,9 +35,8 @@ const PostBox = React.createClass({
 
         render: function() {
              return (<div>
-                 <h1>Recent Posts</h1>
-                 <PostList status={this.state.status} data={this.state.data}/>
                  <PostForm onCommentSubmit={this.handleSubmit}/>
+                 <PostList status={this.state.status} data={this.state.data}/>
              </div>)
         }
     });

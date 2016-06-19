@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import style from './post.style'
 
 const PostForm = React.createClass({
 
@@ -27,15 +28,16 @@ const PostForm = React.createClass({
 
     render: function() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <input type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder="title"></input>
+            <div style={style.postContainer}>
+                <div style={style.avatar}><img src="mz.jpg" style={style.img}/></div>
+                <div style={style.post}>
+                    <form onSubmit={this.handleSubmit}>
+                        <input style={style.inputText} type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder="title"></input>
+                        <textarea style={style.inputText} name="content" value={this.state.content} onChange={this.handleContentChange} placeholder="content"></textarea>
+                        <input style={style.submitButton} type="submit" value="Post"></input>
+                    </form>
                 </div>
-                <div>
-                    <input type="text" name="content" value={this.state.content} onChange={this.handleContentChange} placeholder="content"></input>
-                </div>
-                <input type="submit" value="Post"></input>
-            </form>
+            </div>
         )
     }
 });
