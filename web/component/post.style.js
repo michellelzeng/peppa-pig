@@ -17,10 +17,7 @@ const style = {
         flexRlow: 'row, wrap',
         padding: '10px'
     },
-    image: {
-        width: '100px',
-        height: '100px'
-    },
+
     inputText: {
         width: '90%',
         display: 'block',
@@ -32,11 +29,16 @@ const style = {
     submitButton: {
        display: 'block',
        margin: 'auto',
-       padding: '5px 10px'
+       padding: '20px'
     },
-    img: {
-        width: '100px',
-        height: '100px'
+    avatarImage: {
+        width: '70px',
+        height: '70px'
+    },
+    image: {
+        width: '600px',
+        height: '600px',
+        display: 'block'
     }
 };
 

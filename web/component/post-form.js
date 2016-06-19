@@ -29,7 +29,7 @@ const PostForm = React.createClass({
     render: function() {
         return (
             <div style={style.postContainer}>
-                <div style={style.avatar}><img src="mz.jpg" style={style.img}/></div>
+                <div style={style.avatar}><img src="mz.jpg" style={style.avatarImage}/></div>
                 <div style={style.post}>
                     <form onSubmit={this.handleSubmit}>
                         <input style={style.inputText} type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder="title"></input>
