@@ -12,7 +12,7 @@ const PostList = React.createClass({
        } 
         
        const postNodes = this.props.data.map((post) => {
-            return <Post key={post.key} author={post.title}>{post.content}</Post> ;
+            return <Post key={post.key}> {post.content}</Post> ;
        });
 
        return (<div>

@@ -6,8 +6,7 @@ const Post = React.createClass({
                 <div style={style.postContainer}>
                     <div style={style.avatar}><img src="mz.jpg" style={style.avatarImage}/></div>
                     <div style={style.post}>
-                        <p>{this.props.author}</p>
-                        <p>{this.props.children}</p>
+                        <p style={style.paragraph}>{this.props.children}</p>
                         <img src="Matt1.jpg" style={style.image}/>
                         <img src="Matt2.jpg" style={style.image}/>
                         <img src="Matt3.jpg" style={style.image}/>

@@ -2,34 +2,43 @@ const style = {
     postContainer: {
         display: 'flex',
         flexFlow: 'row wrap',
-        width: '70%',
         padding: '10px',
-        margin: '10px'
+        margin: '10px',
+        maxWidth: 800
     },
     avatar: {
-        marginLeft: '20px',
         marginRight: '20px',
-        flex: 1
+        width: 70,
+        height: 70,
+        flex: '0, 0, auto'
     },
     post: {
         border: '1px solid #BBB',
-        flex: 8,
+        flex: 1,
         flexRlow: 'row, wrap',
-        padding: '10px'
+        padding: 10
     },
 
     inputText: {
-        width: '90%',
+        width: '100%',
         display: 'block',
         margin: 'auto',
-        marginBottom: '5px',
-        marginTop: '10px',
-        padding: '10px'
+        height: 100,
+        marginBottom: 8
     },
-    submitButton: {
-       display: 'block',
-       margin: 'auto',
-       padding: '20px'
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexFlow: 'row nowrap'
+    },
+    uploadFile: {
+
+    },
+    button: {
+       border: 1,
+       backgroundColor: '#3b5998',
+       color:'white',
+       padding: '7px 16px'
     },
     avatarImage: {
         width: '70px',
@@ -39,6 +48,9 @@ const style = {
         width: '600px',
         height: '600px',
         display: 'block'
+    },
+    paragraph: {
+        margin: '5px 0px'
     }
 };
 
