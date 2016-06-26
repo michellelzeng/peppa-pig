@@ -21,6 +21,10 @@ const PostForm = React.createClass({
         this.setState({content: e.target.value});
     },
 
+    handleFileChange: function() {
+        document.getElementById('uploadFile').click();
+    },
+
     render: function() {
         return (
             <div style={style.postContainer}>
@@ -29,8 +33,9 @@ const PostForm = React.createClass({
                     <form onSubmit={this.handleSubmit}>
                         <textarea style={style.inputText} name="content" value={this.state.content} onChange={this.handleContentChange} placeholder="content"></textarea>
                         <div style={style.buttonContainer}>
-                            <input type='file' style={style.uploadFile} multiple />
-                            <button style={style.button}>Post</button>
+                            <input id='uploadFile' type="file" style={style.uploadFile} multiple style={style.hide}/>
+                            <button onClick={this.handleFileChange}>Upload image</button>
+                            <button style={style.button} >Post</button>
                         </div>
                     </form>
                 </div>

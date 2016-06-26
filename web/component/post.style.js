@@ -51,6 +51,9 @@ const style = {
     },
     paragraph: {
         margin: '5px 0px'
+    },
+    hide: {
+        display: 'none'
     }
 };
 
