@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script >
+        function handleFiles(files) {
+            console.log(files.length);
+            for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /^image\//;
+
+            if (!imageType.test(file.type)) {
+              continue;
+            }
+
+            var img = document.createElement("img");
+            img.classList.add("obj");
+            img.file = file;
+            document.getElementById("preview").appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+            reader.readAsDataURL(file);
+  }
+        }
+    </script>
+</head>
+<body>
+Hello world!
+<input type="file" onChange="handleFiles(this.files)"/>
+<div id="preview">
+
+</div>
+</body>
+</html>
