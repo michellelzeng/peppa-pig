@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .obj{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
     <script >
         function handleFiles(files) {
             console.log(files.length);
@@ -28,7 +34,7 @@
 </head>
 <body>
 Hello world!
-<input type="file" onChange="handleFiles(this.files)"/>
+<input type="file" multiple onChange="handleFiles(this.files)"/>
 <div id="preview">
 
 </div>
