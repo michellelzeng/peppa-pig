@@ -25,10 +25,27 @@ const PostForm = React.createClass({
         document.getElementById('uploadFile').click();
     },
 
-    handleFileChange: function(event, files) {
+    handleFileChange: function(event) {
         console.log("arguments " + arguments.length);
         console.log(document.getElementById('uploadFile').files.length);
+        const files = document.getElementById('uploadFile').files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /^image\//;
 
+            if (!imageType.test(file.type)) {
+              continue;
+            }
+
+            var img = document.createElement("img");
+            img.classList.add("preview-img");
+            img.file = file;
+            document.getElementById("preview").appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+            reader.readAsDataURL(file);
+        }
     },
 
     render: function() {
@@ -40,6 +57,7 @@ const PostForm = React.createClass({
                 <div style={style.post}>
                     <form onSubmit={this.handleSubmit}>
                         <textarea style={style.inputText} name="content" value={this.state.content} placeholder="content"></textarea>
+                        <div id="preview" />
                         <div style={style.buttonContainer}>
                             <input id='uploadFile' type="file" style={style.uploadFile} multiple style={style.hide} onChange={this.handleFileChange}/>
                             <button onClick={this.openBrowseFileDialogue}>Upload image</button>
