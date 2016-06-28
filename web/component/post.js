@@ -7,10 +7,12 @@ const Post = React.createClass({
                     <div style={style.avatar}><img src="mz.jpg" style={style.avatarImage}/></div>
                     <div style={style.post}>
                         <p style={style.paragraph}>{this.props.children}</p>
-                        <img src="Matt1.jpg" style={style.image}/>
-                        <img src="Matt2.jpg" style={style.image}/>
-                        <img src="Matt3.jpg" style={style.image}/>
-                        <img src="Matt4.jpg" style={style.image}/>
+                        {this.props.photos.map( (photo) => {
+                            console.log(photo.id);
+                            const name = photo.id + ".jpg";
+                            console.log(name);
+                            return <img src={name} style={style.image}/>
+                        })}
                     </div>
                 </div>
         );

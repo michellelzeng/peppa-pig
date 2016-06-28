@@ -25,9 +25,6 @@ public class PeppaPigApplication {
 			// save a couple of Posts
 			repository.save(new PiggiePost("Post 1", "Daily post May 20", Lists.newArrayList(new Photo("1"), new Photo("2"))));
 			repository.save(new PiggiePost("Post 2", "Daily post May 21", Lists.newArrayList(new Photo("3"), new Photo("4"))));
-			repository.save(new PiggiePost("Post 3", "Daily post May 22", Lists.newArrayList(new Photo("5"), new Photo("6"))));
-			repository.save(new PiggiePost("Post 4", "Daily post May 23", Lists.newArrayList(new Photo("7"), new Photo("8"))));
-			repository.save(new PiggiePost("Post 5", "Daily post May 24", Lists.newArrayList(new Photo("9"), new Photo("10"))));
 
 			// fetch all posts
 			log.info("posts found with findAll():");
