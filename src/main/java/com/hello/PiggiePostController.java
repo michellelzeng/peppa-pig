@@ -21,7 +21,7 @@ public class PiggiePostController {
     }
 
     @RequestMapping("/getAllPiggiePosts")
-    public Iterable<PiggiePost> greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public Iterable<PiggiePost> greeting() {
         return piggiePostRepository.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "id")));
     }
 }

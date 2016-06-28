@@ -1,11 +1,14 @@
 package com.hello;
 
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+
 
 @SpringBootApplication
 public class PeppaPigApplication {
@@ -20,11 +23,11 @@ public class PeppaPigApplication {
 	public CommandLineRunner demo(PiggiePostRepository repository) {
 		return (args) -> {
 			// save a couple of Posts
-			repository.save(new PiggiePost("Post 1", "Daily post May 20"));
-			repository.save(new PiggiePost("Post 2", "Daily post May 21"));
-			repository.save(new PiggiePost("Post 3", "Daily post May 22"));
-			repository.save(new PiggiePost("Post 4", "Daily post May 23"));
-			repository.save(new PiggiePost("Post 5", "Daily post May 24"));
+			repository.save(new PiggiePost("Post 1", "Daily post May 20", Lists.newArrayList(new Photo("1"), new Photo("2"))));
+			repository.save(new PiggiePost("Post 2", "Daily post May 21", Lists.newArrayList(new Photo("3"), new Photo("4"))));
+			repository.save(new PiggiePost("Post 3", "Daily post May 22", Lists.newArrayList(new Photo("5"), new Photo("6"))));
+			repository.save(new PiggiePost("Post 4", "Daily post May 23", Lists.newArrayList(new Photo("7"), new Photo("8"))));
+			repository.save(new PiggiePost("Post 5", "Daily post May 24", Lists.newArrayList(new Photo("9"), new Photo("10"))));
 
 			// fetch all posts
 			log.info("posts found with findAll():");
