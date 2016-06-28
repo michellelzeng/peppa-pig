@@ -49,14 +49,12 @@ const PostForm = React.createClass({
     },
 
     render: function() {
-
-
         return (
             <div style={style.postContainer}>
                 <div style={style.avatar}><img src="mz.jpg" style={style.avatarImage}/></div>
                 <div style={style.post}>
                     <form onSubmit={this.handleSubmit}>
-                        <textarea style={style.inputText} name="content" value={this.state.content} placeholder="content"></textarea>
+                        <textarea style={style.inputText} name="content" value={this.state.content} placeholder="content" onChange={this.handleContentChange}></textarea>
                         <div id="preview" />
                         <div style={style.buttonContainer}>
                             <input id='uploadFile' type="file" style={style.uploadFile} multiple style={style.hide} onChange={this.handleFileChange}/>

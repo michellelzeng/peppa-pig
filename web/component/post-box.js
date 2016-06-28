@@ -10,10 +10,10 @@ const PostBox = React.createClass({
         ),
 
         componentDidMount: function() {
-            fetch("/piggiepost")
+            fetch("/getAllPiggiePosts")
                     .then((response) => response.json())
                     .then((data) => {
-                        const posts = data._embedded.piggiepost;
+                        const posts = data;
                         this.setState({status: 'ready', data: posts});
                         this.props.store.dispatch({type: 'SET_POSTS', posts: posts});
                     });
@@ -28,7 +28,7 @@ const PostBox = React.createClass({
                 body: JSON.stringify(post)
             });
             post.key = Date.now();
-            let newPosts = this.state.data.concat([post]);
+            let newPosts = [post].concat(this.state.data);
             this.setState({data: newPosts});
             this.props.store.dispatch({type: 'SET_POSTS', posts: newPosts});
         },
