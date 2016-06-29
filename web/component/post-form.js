@@ -13,7 +13,7 @@ const PostForm = React.createClass({
         if(!content) {
             return;
         }
-        this.props.onCommentSubmit({content});
+        this.props.onCommentSubmit({content}, document.getElementById('uploadFile').files);
         this.setState({content:''});
     },
 

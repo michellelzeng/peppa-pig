@@ -12,7 +12,7 @@ const PostList = React.createClass({
        } 
         
        const postNodes = this.props.data.map((post) => {
-            return <Post key={post.key} photos={post.photos}> {post.content}</Post> ;
+            return <Post key={post.key} photos={post.photos == null ? [] : post.photos}> {post.content}</Post> ;
        });
 
        return (<div>
