@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './post.style'
+import style from './post.style';
 
 const PostForm = React.createClass({
 
@@ -13,7 +13,7 @@ const PostForm = React.createClass({
         if(!content) {
             return;
         }
-        this.props.onCommentSubmit({content}, document.getElementById('uploadFile').files);
+        this.props.onSubmit({content});
         this.setState({content:''});
     },
 
@@ -26,11 +26,11 @@ const PostForm = React.createClass({
     },
 
     handleFileChange: function(event) {
-        console.log("arguments " + arguments.length);
-        console.log(document.getElementById('uploadFile').files.length);
-        const files = document.getElementById('uploadFile').files;
+        const files = event.target.files;
+
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
+            this.uploadFile(file);
             var imageType = /^image\//;
 
             if (!imageType.test(file.type)) {
@@ -40,12 +40,21 @@ const PostForm = React.createClass({
             var img = document.createElement("img");
             img.classList.add("preview-img");
             img.file = file;
-            document.getElementById("preview").appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+            document.getElementById("preview").appendChild(img);
 
             var reader = new FileReader();
             reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
             reader.readAsDataURL(file);
         }
+    },
+
+    uploadFile: function(file) {
+        const xmlHttpRequest = new XMLHttpRequest();
+        const formData = new FormData();
+        xmlHttpRequest.open("POST", "/uploadFile", true);
+        formData.append("upload_file", file);
+        xmlHttpRequest.send(formData);
+//          fetch()
     },
 
     render: function() {

@@ -8,10 +8,7 @@ const Post = React.createClass({
                     <div style={style.post}>
                         <p style={style.paragraph}>{this.props.children}</p>
                         {this.props.photos.map( (photo) => {
-                            console.log(photo.id);
-                            const name = photo.id + ".jpg";
-                            console.log(name);
-                            return <img src={name} style={style.image}/>
+                            return <img key={photo.id} src={photo.id + ".jpg"} style={style.image}/>
                         })}
                     </div>
                 </div>
