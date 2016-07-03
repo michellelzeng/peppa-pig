@@ -49,12 +49,20 @@ const PostForm = React.createClass({
     },
 
     uploadFile: function(file) {
-        const xmlHttpRequest = new XMLHttpRequest();
-        const formData = new FormData();
-        xmlHttpRequest.open("POST", "/uploadFile", true);
-        formData.append("upload_file", file);
-        xmlHttpRequest.send(formData);
+//        const xmlHttpRequest = new XMLHttpRequest();
+//        const formData = new FormData();
+//        xmlHttpRequest.open("POST", "/uploadFile", true);
+//        formData.append("upload_file", file);
+//        xmlHttpRequest.send(formData);
 //          fetch()
+        const formData = new FormData();
+        formData.append("upload_file", file);
+        fetch("/uploadFile", {
+            method: "POST",
+            body: formData
+        });
+        console.log("using fetch");
+
     },
 
     render: function() {
