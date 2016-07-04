@@ -38,17 +38,19 @@ public class PiggiePostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/uploadFile")
-    public void handleFileUpload(@RequestParam(name = "upload_file") MultipartFile file) {
+    public String handleFileUpload(@RequestParam(name = "upload_file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
-                Files.copy(file.getInputStream(), Paths.get(ROOT, hash(file.getInputStream())),
+                String hash = hash(file.getInputStream());
+                Files.copy(file.getInputStream(), Paths.get(ROOT, hash),
                         StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("file uploaded");
+                return hash;
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("file is empty");
+            throw new RuntimeException("file is empty");
         }
     }
 

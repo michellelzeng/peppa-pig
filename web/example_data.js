@@ -15,5 +15,13 @@ export default {
             "title": "Peppa and George'sGeorge's balloon",
             "content": "Pirate treasure details"
         }
+    ],
+    "photos" : [
+        {
+            hash: 'hash1',
+        }
+        {
+            hash: 'hash2'
+        }
     ]
 }

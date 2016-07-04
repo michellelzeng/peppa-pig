@@ -20,6 +20,7 @@ const PostBox = React.createClass({
         },
 
         handleSubmit: function(post) {
+            post.photos = this.props.state.photos;
             fetch("/piggiepost", {
                 method:'POST',
                 headers: {
@@ -33,9 +34,29 @@ const PostBox = React.createClass({
             this.props.store.dispatch({type: 'SET_POSTS', posts: newPosts});
         },
 
+        uploadFile: function(file) {
+                const store = this.props.store;
+                const formData = new FormData();
+                formData.append("upload_file", file);
+                fetch("/uploadFile", {
+                    method: "POST",
+                    body: formData
+                }).then(function (response) {
+                    return response.text();
+                }).then(function (hash){
+                    console.log('hash is: ' + hash);
+                    store.dispatch({
+                        type: 'SAVE_HASH',
+                        photo: {
+                            hash
+                        }
+                    });
+                });
+            },
+
         render: function() {
              return (<div>
-                 <PostForm onSubmit={this.handleSubmit}/>
+                 <PostForm onSubmit={this.handleSubmit} onFileUpload={this.uploadFile}/>
                  <PostList status={this.state.status} data={this.state.data}/>
              </div>)
         }
