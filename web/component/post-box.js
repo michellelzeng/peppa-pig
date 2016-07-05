@@ -32,6 +32,12 @@ const PostBox = React.createClass({
             let newPosts = [post].concat(this.state.data);
             this.setState({data: newPosts});
             this.props.store.dispatch({type: 'SET_POSTS', posts: newPosts});
+
+            //clear the photos on the preview div
+            const previewDiv = document.getElementById('preview');
+            while(previewDiv.firstChild) {
+                previewDiv.removeChild(previewDiv.firstChild);
+            }
         },
 
         uploadFile: function(file) {

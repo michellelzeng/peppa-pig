@@ -7,7 +7,8 @@ export default function appReducer(state = initialState, action) {
         case 'SET_POSTS':
             return {
                 ...state,
-                posts: action.posts
+                posts: action.posts,
+                photos: []
             };
         case 'SAVE_HASH':{
             let photos = [];

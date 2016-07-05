@@ -4,7 +4,7 @@ const style = {
         flexFlow: 'row wrap',
         padding: '10px',
         margin: '10px',
-        maxWidth: 800
+        maxWidth: 600
     },
     avatar: {
         marginRight: '20px',
@@ -45,8 +45,8 @@ const style = {
         height: '70px'
     },
     image: {
-        width: '600px',
-        height: '600px',
+        width: '476px',
+        height: '237px',
         display: 'block'
     },
     paragraph: {
