@@ -1,6 +1,9 @@
 import React from 'react';
 import style from './post.style.js';
+import Photo from './photo';
 const Post = React.createClass({
+
+
     render: function() {
         return (
                 <div style={style.postContainer}>
@@ -8,7 +11,8 @@ const Post = React.createClass({
                     <div style={style.post}>
                         <p style={style.paragraph}>{this.props.children}</p>
                         {this.props.photos.map( (photo) => {
-                            return <img key={photo.id} src={photo.id + ".jpg"} style={style.image}/>
+//                            return <img key={photo.id} src={photo.id + ".jpg"} style={style.image}/>
+                            return <Photo key={photo.hash} hash={photo.hash} />
                         })}
                     </div>
                 </div>

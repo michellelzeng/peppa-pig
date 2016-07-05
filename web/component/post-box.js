@@ -20,8 +20,8 @@ const PostBox = React.createClass({
         },
 
         handleSubmit: function(post) {
-            post.photos = this.props.state.photos;
-            fetch("/piggiepost", {
+            post.photos = this.props.store.getState().photos;
+            fetch("/savePiggiePost", {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'

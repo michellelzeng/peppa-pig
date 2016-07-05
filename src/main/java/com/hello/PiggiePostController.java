@@ -2,28 +2,23 @@ package com.hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class PiggiePostController {
 
-    static final String ROOT = "/Users/michelle/piggie-home/temp";
+    static final String HOME = "/Users/michelle/piggie-home/";
+    static final String TEMP_FOLER = HOME + "temp/";
+    static final String PHOTO_FOLER = HOME + "photo/";
     private PiggiePostRepository piggiePostRepository;
 
     @Autowired
@@ -37,12 +32,22 @@ public class PiggiePostController {
         return posts;
     }
 
+    @RequestMapping(path = "/savePiggiePost", method=RequestMethod.POST)
+    public void savePost(@RequestBody PiggiePost piggiePost) {
+        piggiePostRepository.save(piggiePost);
+
+        File folder = new File(TEMP_FOLER);
+        for(File file :folder.listFiles() ) {
+            boolean result = file.renameTo(new File(PHOTO_FOLER + file.getName()));
+        }
+    }
+
     @RequestMapping(method = RequestMethod.POST, path = "/uploadFile")
     public String handleFileUpload(@RequestParam(name = "upload_file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
                 String hash = hash(file.getInputStream());
-                Files.copy(file.getInputStream(), Paths.get(ROOT, hash),
+                Files.copy(file.getInputStream(), Paths.get(TEMP_FOLER, hash),
                         StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("file uploaded");
                 return hash;
@@ -52,6 +57,11 @@ public class PiggiePostController {
         } else {
             throw new RuntimeException("file is empty");
         }
+    }
+
+    @RequestMapping(path="/photo" , produces = "image/jpg")
+    public byte[] getImage(@RequestParam(value="hash") String fileHash) throws IOException {
+        return Files.readAllBytes(Paths.get(PHOTO_FOLER + fileHash));
     }
 
     private String hash(InputStream inputStream) throws Exception{
