@@ -46,7 +46,7 @@ const style = {
     },
     image: {
         width: '476px',
-        height: '237px',
+        height: '300px',
         display: 'block'
     },
     paragraph: {

@@ -8,7 +8,6 @@ const PostForm = React.createClass({
     ),
 
     handleSubmit: function(e) {
-        e.preventDefault();
         const content = this.state.content.trim();
         if(!content) {
             return;
@@ -53,15 +52,13 @@ const PostForm = React.createClass({
             <div style={style.postContainer}>
                 <div style={style.avatar}><img src="mz.jpg" style={style.avatarImage}/></div>
                 <div style={style.post}>
-                    <form onSubmit={this.handleSubmit}>
                         <textarea style={style.inputText} name="content" value={this.state.content} placeholder="content" onChange={this.handleContentChange}></textarea>
                         <div id="preview" />
                         <div style={style.buttonContainer}>
                             <input id='uploadFile' type="file" style={style.uploadFile} multiple style={style.hide} onChange={this.handleFileChange}/>
                             <button onClick={this.openBrowseFileDialogue}>Upload image</button>
-                            <button style={style.button} >Post</button>
+                            <button style={style.button} onClick={this.handleSubmit}>Post</button>
                         </div>
-                    </form>
                 </div>
             </div>
         )
