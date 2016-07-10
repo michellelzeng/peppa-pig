@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './post.style';
+import ProgressBar from './progress-bar';
 
 const PostForm = React.createClass({
-
     getInitialState: () => (
         {content: ''}
     ),
@@ -55,6 +55,7 @@ const PostForm = React.createClass({
                 <div style={style.post}>
                     <form onSubmit={this.handleSubmit}>
                         <textarea style={style.inputText} name="content" value={this.state.content} placeholder="content" onChange={this.handleContentChange}></textarea>
+                        <ProgressBar percentage={80} />
                         <div id="preview" />
                         <div style={style.buttonContainer}>
                             <input id='uploadFile' type="file" style={style.uploadFile} multiple style={style.hide} onChange={this.handleFileChange}/>
