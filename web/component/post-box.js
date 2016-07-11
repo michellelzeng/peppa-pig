@@ -41,23 +41,38 @@ const PostBox = React.createClass({
         },
 
         uploadFile: function(file) {
-                const store = this.props.store;
-                const formData = new FormData();
-                formData.append("upload_file", file);
-                fetch("/uploadFile", {
-                    method: "POST",
-                    body: formData
-                }).then(function (response) {
-                    return response.text();
-                }).then(function (hash){
-                    console.log('hash is: ' + hash);
+            const store = this.props.store;
+            const formData = new FormData();
+            formData.append("file", file);
+//                fetch("/uploadFile", {
+//                    method: "POST",
+//                    body: formData
+//                }).then(function (response) {
+//                    return response.text();
+//                }).then(function (hash){
+//                    console.log('hash is: ' + hash);
+//                    store.dispatch({
+//                        type: 'SAVE_HASH',
+//                        photo: {
+//                            hash
+//                        }
+//                    });
+//                });
+            const xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function() {
+                if(xmlHttpRequest.readyState === XMLHttpRequest.DONE) {
+                    const hash = xmlHttpRequest.responseText;
                     store.dispatch({
                         type: 'SAVE_HASH',
                         photo: {
                             hash
                         }
                     });
-                });
+                }
+            }
+            xmlHttpRequest.open('POST', '/uploadFile');
+            xmlHttpRequest.send(formData);
+
             },
 
         render: function() {

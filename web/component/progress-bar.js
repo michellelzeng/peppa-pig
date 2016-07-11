@@ -2,17 +2,32 @@ import React, {Component} from 'react';
 import getProgressBarStyle from './progress-bar.style';
 
 const ProgressBar = React.createClass( {
+    getInitialState: function() {
+        return {percentage: this.props.percentage}
+    },
+
     propTypes: {
         percentage: React.PropTypes.number
     },
-    defaultPropTypes () {
+    getDefaultProps: function () {
         return {
             percentage: 0
         }
     },
+
+    changeProgress: function(percentage) {
+        this.setState({percentage: this.state.percentage + 10});
+    },
+
+    componentDidMount: function() {
+//        this.changeProgress(100);
+//this.setState({percentage: 100});
+//        setInterval(this.changeProgress, 1000);
+    },
+
     render: function() {
         return  (
-            <div style={getProgressBarStyle(this.props.percentage)}>
+            <div style={getProgressBarStyle(this.state.percentage)}>
             </div>
             )
     }

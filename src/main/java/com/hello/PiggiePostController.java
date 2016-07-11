@@ -43,7 +43,7 @@ public class PiggiePostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/uploadFile")
-    public String handleFileUpload(@RequestParam(name = "upload_file") MultipartFile file) {
+    public String handleFileUpload(@RequestParam(name = "file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
                 String hash = hash(file.getInputStream());
