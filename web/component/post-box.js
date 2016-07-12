@@ -70,10 +70,15 @@ const PostBox = React.createClass({
                     });
                 }
             }
+            xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
             xmlHttpRequest.open('POST', '/uploadFile');
             xmlHttpRequest.send(formData);
 
-            },
+        },
+
+        updateProgress: function(event) {
+            console.log(event.loaded/event.total, 'loaded');
+        },
 
         render: function() {
              return (<div>
