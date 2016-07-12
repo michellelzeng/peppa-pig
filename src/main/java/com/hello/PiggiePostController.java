@@ -16,7 +16,7 @@ import java.security.MessageDigest;
 @RestController
 public class PiggiePostController {
 
-    static final String HOME = "/Users/mzeng/piggie-home/";
+    static final String HOME = "/Users/michelle/piggie-home/";
     static final String TEMP_FOLER = HOME + "temp/";
     static final String PHOTO_FOLER = HOME + "photo/";
     private PiggiePostRepository piggiePostRepository;

@@ -8,16 +8,16 @@ const PostForm = React.createClass({
     ),
 
     handleSubmit: function(e) {
-        const content = this.state.content.trim();
-        if(!content) {
+        if(!this.state.content.trim()) {
             return;
         }
-        this.props.onSubmit({content});
+        this.props.onSubmit();
         this.setState({content:''});
     },
 
     handleContentChange: function(e) {
         this.setState({content: e.target.value});
+        this.set
     },
 
     openBrowseFileDialogue: function() {

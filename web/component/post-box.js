@@ -1,6 +1,7 @@
 import React from 'react';
 import PostList from './post-list';
 import PostForm from './post-form';
+import {addPhoto} from '../action-creator';
 
 const PostBox = React.createClass({
         getInitialState: () => (
@@ -19,20 +20,16 @@ const PostBox = React.createClass({
                     });
         },
 
-        handleSubmit: function(post) {
-            post.photos = this.props.store.getState().photos;
+        handleSubmit: function() {
             fetch("/savePiggiePost", {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(post)
+                body: JSON.stringify(this.props.store.getState().draft)
             });
-            post.key = Date.now();
-            let newPosts = [post].concat(this.state.data);
-            this.setState({data: newPosts});
-            this.props.store.dispatch({type: 'SET_POSTS', posts: newPosts});
-
+            this.props.store.dispatch({type: 'ADD_POST', post: this.props.store.getState().draft});
+            this.setState({data: this.props.store.getState()});
             //clear the photos on the preview div
             const previewDiv = document.getElementById('preview');
             while(previewDiv.firstChild) {
@@ -44,30 +41,11 @@ const PostBox = React.createClass({
             const store = this.props.store;
             const formData = new FormData();
             formData.append("file", file);
-//                fetch("/uploadFile", {
-//                    method: "POST",
-//                    body: formData
-//                }).then(function (response) {
-//                    return response.text();
-//                }).then(function (hash){
-//                    console.log('hash is: ' + hash);
-//                    store.dispatch({
-//                        type: 'SAVE_HASH',
-//                        photo: {
-//                            hash
-//                        }
-//                    });
-//                });
             const xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function() {
                 if(xmlHttpRequest.readyState === XMLHttpRequest.DONE) {
                     const hash = xmlHttpRequest.responseText;
-                    store.dispatch({
-                        type: 'SAVE_HASH',
-                        photo: {
-                            hash
-                        }
-                    });
+                    store.dispatch(addPhoto(hash));
                 }
             }
             xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
