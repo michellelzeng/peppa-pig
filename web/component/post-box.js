@@ -7,7 +7,8 @@ const PostBox = React.createClass({
         getInitialState: () => (
             {
                 status: 'loading',
-                data: []}
+                data: []
+            }
         ),
 
         componentDidMount: function() {
@@ -29,7 +30,7 @@ const PostBox = React.createClass({
                 body: JSON.stringify(this.props.store.getState().draft)
             });
             this.props.store.dispatch({type: 'ADD_POST', post: this.props.store.getState().draft});
-            this.setState({data: this.props.store.getState()});
+            this.setState({data: this.props.store.getState().posts});
             //clear the photos on the preview div
             const previewDiv = document.getElementById('preview');
             while(previewDiv.firstChild) {
@@ -47,7 +48,7 @@ const PostBox = React.createClass({
                     const hash = xmlHttpRequest.responseText;
                     store.dispatch(addPhoto(hash));
                 }
-            }
+            };
             xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
             xmlHttpRequest.open('POST', '/uploadFile');
             xmlHttpRequest.send(formData);

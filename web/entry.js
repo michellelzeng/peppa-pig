@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NewsFeed from './component/news-feed';
 import {createStore} from "redux";
 import appReducer from './reducer';
 import PostBox from './component/post-box';
+import DispatchProvider from './dispatch-provider';
 
 function init(){
     const store = createStore(appReducer);
-    ReactDOM.render(<PostBox store={store}/>, document.getElementById("post-box"));
+    ReactDOM.render(
+        <DispatchProvider dispatch={store.dispatch}>
+            <PostBox store={store}/>
+        </DispatchProvider>
+        , document.getElementById("post-box"));
 }
 
 if (document.readyState === 'complete') {

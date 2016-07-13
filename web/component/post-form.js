@@ -1,11 +1,16 @@
 import React from 'react';
 import style from './post.style';
 import ProgressBar from './progress-bar';
+import {changeContent} from '../action-creator';
 
 const PostForm = React.createClass({
     getInitialState: () => (
         {content: ''}
     ),
+
+    contextTypes: {
+        dispatch: React.PropTypes.func
+    },
 
     handleSubmit: function(e) {
         if(!this.state.content.trim()) {
@@ -17,7 +22,7 @@ const PostForm = React.createClass({
 
     handleContentChange: function(e) {
         this.setState({content: e.target.value});
-        this.set
+        this.context.dispatch(changeContent(e.target.value));
     },
 
     openBrowseFileDialogue: function() {

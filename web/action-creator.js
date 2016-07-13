@@ -5,4 +5,11 @@ export const addPhoto = (hash) => {
             hash: hash
         }
     }
-}
+};
+
+export const changeContent = (content) => {
+    return {
+        type: 'CHANGE_CONTENT',
+        content: content
+    }    
+};

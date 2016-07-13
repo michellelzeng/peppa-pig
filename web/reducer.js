@@ -28,7 +28,7 @@ const initialState = {
     posts: [],
     draft: {
         content: '',
-        photo: []
+        photos: []
     }
 };
 
@@ -51,7 +51,7 @@ export default function appReducer(state = initialState, action) {
                 ...state,
                 draft: {
                     ...state.draft,
-                    photo: photos
+                    photos: photos
                 }
             }
         }
@@ -60,14 +60,19 @@ export default function appReducer(state = initialState, action) {
                 posts: [action.post].concat(state.posts),
                 draft: {
                     content: '',
-                    photo: []
+                    photos: []
                 }
 
             }
-        case 'SAVE_PHOTO_PROGRESS': {
-
+        case 'CHANGE_CONTENT': {
+            return {
+                ...state,
+                draft: {
+                    ...state.draft,
+                    content: action.content
+                }
+            }
         }
-
     }
     return state;
 }
