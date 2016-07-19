@@ -2,8 +2,11 @@ import React from 'react';
 import style from './post.style';
 import ProgressBar from './progress-bar';
 import {changeContent} from '../action-creator';
+import {addPhoto, updateProgress} from '../action-creator';
 
 const PostForm = React.createClass({
+    propTypes: {}
+    
     getInitialState: () => (
         {content: ''}
     ),
@@ -34,7 +37,7 @@ const PostForm = React.createClass({
 
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            this.props.onFileUpload(file);
+            this.uploadFile(file);
             var imageType = /^image\//;
 
             if (!imageType.test(file.type)) {
@@ -50,6 +53,29 @@ const PostForm = React.createClass({
             reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
             reader.readAsDataURL(file);
         }
+    },
+
+    uploadFile: function(file) {
+        dispatch(addPhoto());
+        const formData = new FormData();
+        formData.append("file", file);
+        const dispatch = this.context.dispatch;
+        const xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange = function() {
+            if(xmlHttpRequest.readyState === XMLHttpRequest.DONE) {
+                const hash = xmlHttpRequest.responseText;
+                dispatch(updatePhoto(id, hash));
+            }
+        };
+        xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
+        xmlHttpRequest.open('POST', '/uploadFile');
+        xmlHttpRequest.send(formData);
+
+    },
+
+    updateProgress: function(event) {
+        console.log(event.loaded/event.total, 'loaded');
+        this.context.dispatch(updateProgress(event.loaded/event.total));
     },
 
     render: function() {

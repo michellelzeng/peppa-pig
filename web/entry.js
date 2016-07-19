@@ -4,13 +4,14 @@ import {createStore} from "redux";
 import appReducer from './reducer';
 import PostBox from './component/post-box';
 import DispatchProvider from './dispatch-provider';
+import StoreProvider from './store-provider';
 
 function init(){
     const store = createStore(appReducer);
     ReactDOM.render(
-        <DispatchProvider dispatch={store.dispatch}>
-            <PostBox store={store}/>
-        </DispatchProvider>
+            <DispatchProvider dispatch={store.dispatch}>
+                <PostBox store={store}/>
+            </DispatchProvider>
         , document.getElementById("post-box"));
 }
 

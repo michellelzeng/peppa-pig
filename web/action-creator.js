@@ -13,3 +13,12 @@ export const changeContent = (content) => {
         content: content
     }    
 };
+
+export const updateProgress = (hash, progress) => {
+    return {
+        type: 'UPDATE_PROGRESS',
+        hash,
+        progress
+    }
+};
+

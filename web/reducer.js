@@ -6,7 +6,7 @@
             photos: [
                 {
                     id: 1,
-                    hash: 234e5353243242424
+                    hash: '234e5353243242424'
                 }
             ]
         }
@@ -15,7 +15,9 @@
             content: '',
             photos: [
                 {
-                    hash: 23132131313131231
+                    clientId: 0,
+                    hash: '23132131313131231',
+                    progress: 0.5
                 }
             ]
         }
@@ -25,6 +27,7 @@
 */
 
 const initialState = {
+    status: 'loading',
     posts: [],
     draft: {
         content: '',
@@ -37,6 +40,7 @@ export default function appReducer(state = initialState, action) {
         case 'SET_POSTS':
             return {
                 ...state,
+                status: 'loaded',
                 posts: action.posts,
                 draft: {}
             };
@@ -70,6 +74,25 @@ export default function appReducer(state = initialState, action) {
                 draft: {
                     ...state.draft,
                     content: action.content
+                }
+            }
+        }
+        case 'UPDATE_PROGRESS': {
+            // const newPhotos = state.draft.photos.map(function(photo) {
+            //     if (photo.hash === action.hash) {
+            //         return {
+            //             ...photo,
+            //             progress: action.progress
+            //         }
+            //     } else {
+            //         return photo;
+            //     }
+            // });
+            return {
+                ...state,
+                draft: {
+                    ...state.draft,
+                    photos: newPhotos
                 }
             }
         }
