@@ -5,8 +5,7 @@ import {changeContent} from '../action-creator';
 import {addPhoto, updateProgress} from '../action-creator';
 
 const PostForm = React.createClass({
-    propTypes: {}
-    
+
     getInitialState: () => (
         {content: ''}
     ),
@@ -56,7 +55,7 @@ const PostForm = React.createClass({
     },
 
     uploadFile: function(file) {
-        dispatch(addPhoto());
+//        dispatch(addPhoto());
         const formData = new FormData();
         formData.append("file", file);
         const dispatch = this.context.dispatch;

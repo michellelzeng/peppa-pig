@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import appReducer from './reducer';
 import PostBox from './component/post-box';
 import DispatchProvider from './dispatch-provider';
-import StoreProvider from './store-provider';
+import UploadPhotoMiddleware from './middleware/upload-photo-middleware';
 
 function init(){
-    const store = createStore(appReducer);
+    const store = createStore(appReducer, applyMiddleware(UploadPhotoMiddleware));
     ReactDOM.render(
             <DispatchProvider dispatch={store.dispatch}>
                 <PostBox store={store}/>
