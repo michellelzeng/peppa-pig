@@ -1,8 +1,16 @@
-export const addPhoto = (hash) => {
+export const uploadPhoto = (photo) => {
     return {
-        type: 'ADD_PHOTO',
+        type: 'UPLOAD_PHOTO',
+        photo: photo
+    }
+};
+
+export const updatePhotoHash = (clientId, hash) => {
+    return {
+        type: 'UPDATE_PHOTO_HASH',
         photo: {
-            hash: hash
+            clientId,
+            hash
         }
     }
 };

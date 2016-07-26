@@ -2,7 +2,7 @@ import React from 'react';
 import style from './post.style';
 import ProgressBar from './progress-bar';
 import {changeContent} from '../action-creator';
-import {addPhoto, updateProgress} from '../action-creator';
+import {uploadPhoto, updatePhotoHash, updateProgress} from '../action-creator';
 
 const PostForm = React.createClass({
 
@@ -35,41 +35,23 @@ const PostForm = React.createClass({
         const files = event.target.files;
 
         for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            this.uploadFile(file);
+            var photo = files[i];
+            this.context.dispatch(uploadPhoto(photo));
             var imageType = /^image\//;
 
-            if (!imageType.test(file.type)) {
+            if (!imageType.test(photo.type)) {
               continue;
             }
 
             var img = document.createElement("img");
             img.classList.add("preview-img");
-            img.file = file;
+            img.file = photo;
             document.getElementById("preview").appendChild(img);
 
             var reader = new FileReader();
             reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(photo);
         }
-    },
-
-    uploadFile: function(file) {
-//        dispatch(addPhoto());
-        const formData = new FormData();
-        formData.append("file", file);
-        const dispatch = this.context.dispatch;
-        const xmlHttpRequest = new XMLHttpRequest();
-        xmlHttpRequest.onreadystatechange = function() {
-            if(xmlHttpRequest.readyState === XMLHttpRequest.DONE) {
-                const hash = xmlHttpRequest.responseText;
-                dispatch(updatePhoto(id, hash));
-            }
-        };
-        xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
-        xmlHttpRequest.open('POST', '/uploadFile');
-        xmlHttpRequest.send(formData);
-
     },
 
     updateProgress: function(event) {

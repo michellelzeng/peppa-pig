@@ -5,7 +5,7 @@
             content: "Hello world",
             photos: [
                 {
-                    id: 1,
+                    clientId: 1,
                     hash: '234e5353243242424'
                 }
             ]
@@ -29,11 +29,13 @@
 const initialState = {
     status: 'loading',
     posts: [],
-    draft: {
-        content: '',
-        photos: []
-    }
+    draft: initialDraft
 };
+
+const initialDraft = {
+    content: '',
+    photos: []
+}
 
 export default function appReducer(state = initialState, action) {
     switch (action.type) {
@@ -42,20 +44,36 @@ export default function appReducer(state = initialState, action) {
                 ...state,
                 status: 'loaded',
                 posts: action.posts,
-                draft: {}
+                draft: initialDraft
             };
-        case 'ADD_PHOTO': {
-            let photos = [];
-            if (state.draft.photos == null || state.draft.photos.lenght === 0) {
-                photos = [action.photo];
-            } else {
-                photos = state.draft.photos.concat(action.photo);
-            }
+        case 'UPLOAD_PHOTO': {
             return {
                 ...state,
                 draft: {
                     ...state.draft,
-                    photos: photos
+                    photos: [
+                        ...state.draft.photos,
+                        {
+                            clientId: action.clientId,
+                            progress: 0
+                        }
+                    ]
+                }
+            }
+
+        }
+        case 'UPDATE_PHOTO_HASH': {
+            const photos = state.draft.photos.map((photo) => {
+                if(photo.clientId === action.photo.clientId) {
+                    return action.photo;
+                }
+                return photo;
+            });
+            return {
+                ...state,
+                draft: {
+                    ...state.draft,
+                    photos
                 }
             }
         }
@@ -92,7 +110,7 @@ export default function appReducer(state = initialState, action) {
                 ...state,
                 draft: {
                     ...state.draft,
-                    photos: newPhotos
+//                    photos: newPhotos
                 }
             }
         }
