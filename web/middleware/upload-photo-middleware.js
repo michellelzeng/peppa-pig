@@ -1,4 +1,4 @@
-import {updatePhotoHash} from '../action-creator';
+import {updatePhotoHash, setUploadingProgress} from '../action-creator';
 
 export default store => (next) => {
     let clientId = 1;
@@ -14,7 +14,9 @@ export default store => (next) => {
                     store.dispatch(updatePhotoHash(action.clientId, hash));
                 }
             };
-//            xmlHttpRequest.upload.addEventListener('progress', this.updateProgress);
+            xmlHttpRequest.upload.addEventListener('progress', (event) => {
+                store.dispatch(setUploadingProgress(clientId, event.loaded/event.total));
+            });
             xmlHttpRequest.open('POST', '/uploadFile');
             xmlHttpRequest.send(formData);
             clientId++;

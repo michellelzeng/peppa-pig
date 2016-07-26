@@ -60,7 +60,6 @@ export default function appReducer(state = initialState, action) {
                     ]
                 }
             }
-
         }
         case 'UPDATE_PHOTO_HASH': {
             const photos = state.draft.photos.map((photo) => {
@@ -95,22 +94,21 @@ export default function appReducer(state = initialState, action) {
                 }
             }
         }
-        case 'UPDATE_PROGRESS': {
-            // const newPhotos = state.draft.photos.map(function(photo) {
-            //     if (photo.hash === action.hash) {
-            //         return {
-            //             ...photo,
-            //             progress: action.progress
-            //         }
-            //     } else {
-            //         return photo;
-            //     }
-            // });
+        case 'SET_UPLOADING_PROGRESS': {
+             const photos = state.draft.photos.map(function(photo) {
+                 if (photo.clientId === action.clientId) {
+                     return {
+                         ...photo,
+                         progress: action.progress
+                     }
+                 }
+                 return photo;
+             });
             return {
                 ...state,
                 draft: {
                     ...state.draft,
-//                    photos: newPhotos
+                    photos
                 }
             }
         }

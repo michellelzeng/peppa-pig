@@ -22,10 +22,10 @@ export const changeContent = (content) => {
     }    
 };
 
-export const updateProgress = (hash, progress) => {
+export const setUploadingProgress = (clientId, progress) => {
     return {
-        type: 'UPDATE_PROGRESS',
-        hash,
+        type: 'SET_UPLOADING_PROGRESS',
+        clientId,
         progress
     }
 };
